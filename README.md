@@ -1,40 +1,90 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Custom TextField With Country Code
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A Flutter package that provides a highly customizable TextField widget with integrated country code picker and password visibility toggle functionality.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- 📱 Built-in country code picker with flag display
+- 🔒 Password field with visibility toggle
+- 🎨 Highly customizable appearance
+- ✨ Support for form validation
+- 📝 Input formatting options
+- 🌍 Customizable favorite country codes
+- 🎯 Callback support for text and country code changes
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add this to your package's `pubspec.yaml` file:
+
+```yaml
+dependencies:
+  custom_textfield_with_countrycode: ^1.0.0
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+### Basic Phone Number Field
 
 ```dart
-const like = 'sample';
+CustomTextFieldWithCountryCode(
+  controller: TextEditingController(),
+  hintText: 'Enter phone number',
+  countrycode: true,
+  keyboardType: TextInputType.phone,
+  onCountryCodeChanged: (code) {
+    print('Selected country code: $code');
+  },
+)
 ```
+
+### Password Field
+
+```dart
+CustomTextFieldWithCountryCode(
+  controller: TextEditingController(),
+  hintText: 'Enter password',
+  isPassword: true,
+  passwordIconColor: Colors.blue,
+  validator: (value) {
+    if (value?.isEmpty ?? true) {
+      return 'Password is required';
+    }
+    return null;
+  },
+)
+```
+
+### Regular Text Field
+
+```dart
+CustomTextFieldWithCountryCode(
+  controller: TextEditingController(),
+  hintText: 'Enter email',
+  labelText: 'Email',
+  keyboardType: TextInputType.emailAddress,
+  onChanged: (value) {
+    print('Email: $value');
+  },
+)
+```
+
+## Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| controller | TextEditingController | Controls the text being edited |
+| hintText | String | Placeholder text |
+| labelText | String | Label text above the field |
+| isPassword | bool | Enable password mode with visibility toggle |
+| countrycode | bool | Show country code picker |
+| onCountryCodeChanged | Function(String)? | Callback when country code changes |
+| validator | FormFieldValidator<String>? | Form validation function |
+| keyboardType | TextInputType | Type of keyboard to display |
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
-# custom_textfield_with_countrycode
+For issues and feature requests, please visit the [GitHub repository](https://github.com/karthikerebs/custom_textfield_with_countrycode.git).
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
