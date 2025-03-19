@@ -89,6 +89,11 @@ class CustomTextFieldWithCountryCode extends StatefulWidget {
   /// Initial selected country code
   final String? initialSelectedCountry;
 
+  /// Text style for the input field
+  final TextStyle? textStyle;
+
+  final InputDecoration? inputDecoration;
+
   const CustomTextFieldWithCountryCode({
     super.key,
     required this.controller,
@@ -114,6 +119,8 @@ class CustomTextFieldWithCountryCode extends StatefulWidget {
     this.passwordIconColor,
     this.favCountryCode,
     this.initialSelectedCountry,
+    this.textStyle,
+    this.inputDecoration,
   });
 
   @override
@@ -153,35 +160,40 @@ class _CustomTextFieldWithCountryCodeState
           keyboardType: widget.keyboardType,
           inputFormatters: widget.inputFormatters,
           onChanged: widget.onChanged,
-          decoration: InputDecoration(
-            suffixIcon:
-                widget.isPassword
-                    ? IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
-                      icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                        color: widget.passwordIconColor ?? Colors.grey,
-                      ),
-                    )
-                    : null,
-            prefixIcon:
-                widget.countrycode
-                    ? _buildCountryCodePicker()
-                    : widget.prefixIcon != null
-                    ? Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: widget.prefixIcon,
-                    )
-                    : null,
-            hintText: widget.hintText,
-            labelText: widget.labelText,
+          style: widget.textStyle ?? Theme.of(context).textTheme.bodyLarge,
+          decoration:
+              widget.inputDecoration ??
+              InputDecoration(
+                suffixIcon:
+                    widget.isPassword
+                        ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                          icon: Icon(
+                            _obscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: widget.passwordIconColor ?? Colors.grey,
+                          ),
+                        )
+                        : null,
+                prefixIcon:
+                    widget.countrycode
+                        ? _buildCountryCodePicker()
+                        : widget.prefixIcon != null
+                        ? Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: widget.prefixIcon,
+                        )
+                        : null,
+                hintText: widget.hintText,
+                labelText: widget.labelText,
 
-            counter: const Offstage(),
-          ),
+                counter: const Offstage(),
+              ),
           validator: widget.validator,
         ),
       ),

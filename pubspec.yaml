@@ -1,6 +1,6 @@
 name: custom_textfield_with_countrycode
 description: "Custom TextFormField with country code picker, password visibility toggle, and extensive customization options."
-version: 0.0.1
+version: 0.0.3
 homepage: https://github.com/karthikerebs/custom_textfield_with_countrycode.git
 
 environment:
