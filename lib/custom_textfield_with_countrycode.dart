@@ -210,8 +210,10 @@ class _CustomTextFieldWithCountryCodeState
   CountryCodePicker _buildCountryCodePicker() {
     return CountryCodePicker(
       onInit: (CountryCode? countryCode) {
-        if (widget.onCountryCodeChanged != null) {
-          widget.onCountryCodeChanged!('+91');
+        if (widget.onCountryCodeChanged != null && countryCode != null) {
+          widget.onCountryCodeChanged!(
+            countryCode.dialCode ?? widget.initialSelectedCountry ?? '+91',
+          );
         }
       },
       onChanged: (CountryCode countryCode) {
